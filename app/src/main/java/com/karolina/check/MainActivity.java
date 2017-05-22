@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -64,14 +66,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setSupportActionBar(binding.toolbar);
         setTitle("");
-        binding.collapsingToolbar.setTitle("");
         initCollapsingToolbar();
-        binding.collapsingToolbar.setTitle("");
 
         L.vaccineStaticList = new ArrayList<>();
         adapter = new ItemAdapter(this, L.vaccineStaticList, this);
 
-        binding.include.list.setLayoutManager(new LinearLayoutManager(this));
+        //binding.include.list.setLayoutManager(new LinearLayoutManager(this));
+
         binding.include.list.setItemAnimator(new DefaultItemAnimator());
         binding.include.setAdapter(adapter);
 
@@ -84,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            binding.include.list.setLayoutManager(new GridLayoutManager(this, 2));
+        }else{
+            binding.include.list.setLayoutManager(new GridLayoutManager(this, 1));
+        }
         loadData();
     }
 
@@ -227,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onIClick(View v) {
-
+        //TODO: Click de cada elemento de la lista
     }
 
     @Override

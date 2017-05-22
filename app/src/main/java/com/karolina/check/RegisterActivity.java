@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.karolina.check.databinding.ActivityRegisterBinding;
 
@@ -32,7 +33,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.register:
                 if(register()){
+                    Toast.makeText(this, "El registro fue exitoso", Toast.LENGTH_SHORT).show();
                     finish();
+                }else{
+                    Toast.makeText(this, "No se pudo hacer el registro", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case  R.id.cancel:
